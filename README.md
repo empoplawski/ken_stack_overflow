@@ -28,3 +28,22 @@ We would love for you to help make the skeleton more awesome, There are three wa
 3. Code review an open pull request!
 
 Be prepared to give and receive specific, actionable, and kind feedback!
+
+
+***********User Stories *********
+user has a username, email, password
+user can ask question
+user can answer a question
+user can add a comment to a question
+user can add a comment to a answer
+user can vote on a question
+
+
+
+
+
+
+
+
+
+
