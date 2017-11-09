@@ -1,11 +1,14 @@
 require 'faker'
+include BCrypt
 
 5.times do
-  User.create!(username: Faker::Name.first_name, email: Faker::Internet.safe_email)
+  User.create!(username: Faker::Name.first_name, email: Faker::Internet.safe_email, password: "hellohello" )
 end
 
+# hashed_password: Password.create("hellohello").to_s
+
 5.times do
-  Question.create!(title: Faker::ChuckNorris.fact, description: Faker::Hipster.paragraphs(1), asker_id: rand(1..5))
+  Question.create!(title: Faker::ChuckNorris.fact, description: Faker::Hipster.paragraphs(1).join, asker_id: rand(1..5))
 end
 
 5.times do
