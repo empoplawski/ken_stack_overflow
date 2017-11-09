@@ -12,7 +12,7 @@ end
   Answer.create!(body: Faker::Seinfeld.quote, creator_id: rand(1..5), question_id: rand(1..5))
 end
 
-  types = ["question", "answer"]
+  types = ["Question", "Answer"]
 
 5.times do
   Comment.create!(content: Faker::TheFreshPrinceOfBelAir.quote, commenter_id: rand(1..5), commentable_type: types.sample, commentable_id: rand(1..5))
