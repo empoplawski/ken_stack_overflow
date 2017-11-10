@@ -9,6 +9,7 @@ get '/questions/new' do
 end
 
 get '/questions/:id' do
+  @message = params[:message] if params[:message]
   @question = Question.find(params[:id])
   erb :'questions/show'
 end
@@ -18,6 +19,27 @@ get '/questions/:id/comment/new' do
   erb :'comments/new_for_question', locals: { question: @question }
 end
 
+post '/questions/:id/upvote' do
+  @question = Question.find(params[:id])
+  @up_vote = Vote.new(votable_type: "Question", value: 1, votable_id: @question.id, voter_id: current_user.id)
+  if @up_vote.save
+    redirect back
+  else
+    @message = "You can only vote once!!!"
+    erb :'questions/show', locals: {question: @question}
+  end
+end
+
+post '/questions/:id/downvote' do
+  @question = Question.find(params[:id])
+  @down_vote = Vote.new(votable_type: "Question", value: -1, votable_id: @question.id, voter_id: current_user.id)
+  if @down_vote.save
+    redirect back
+  else
+    @message = "You can only vote once!!!"
+    erb :'questions/show', locals: {question: @question}
+  end
+end
 
 post '/questions' do
   @question = Question.new(params[:question])
@@ -63,5 +85,15 @@ post '/questions/:id/answers' do
     @errors = @answer.errors.full_messages
     erb :'comments/new_for_answer'
   end
+end
+
+post '/questions/:id/favorite' do
+  @question = Question.find(params[:id])
+  @question.best_answer_id = Answer.find(params[:answer_id]).id
+  @question.save
+  p @question
+  p "it worked"
+  redirect "/questions/#{@question.id}"
+
 end
 

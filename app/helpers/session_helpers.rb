@@ -16,6 +16,7 @@ helpers do
     current_user == user
   end
 
+
   def authorize!(user)
     redirect '/not_authorized' unless authorized?(user)
   end

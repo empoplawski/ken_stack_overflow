@@ -1,6 +1,22 @@
+<p><%= @message %></p>
 <center><h1><%= @question.title %></h1>
-
 <h2>Page Question: <%= @question.description %></h2>
+
+<div>
+<% if logged_in? %>
+<form id="upvote-button-question" method="POST" action="/questions/<%=@question.id%>/upvote" >
+  <button type="submit" name="upvote" value="submit_value">upvote</button>
+</form>
+<% end %>
+</div>
+
+<div>
+<% if logged_in? %>
+<form id="downvote-button-question" method="POST" action="/questions/<%=@question.id%>/downvote" >
+  <button type="submit" name="downvote" value="submit_value">downvote</button>
+</form>
+<% end %>
+</div>
 
 <div id='links_to_add_content'>
 <a href="/questions/<%=@question.id%>/answer/new">Add an Answer</a>
@@ -8,7 +24,7 @@
 
 </div>
 
-<h1> BELOW THIS IS The Question comments</h1>
+<h1>Question comments</h1>
 <div class="question_comments">
   <ul>
   <% @question.comments.each do |comment| %>
@@ -16,11 +32,46 @@
   </ul>
   <% end %>
 </div>
-<h1> BELOW THIS IS ANSWER</h1>
+<h1>ANSWER</h1>
 <div class="question_answers">
   <ul>
   <% @question.answers.each do |answer| %>
-    <li>Answer: <%= answer.body %></li>
+
+
+
+    <li>
+      <% if @question.best_answer_id == answer.id %>
+      <p>this is the best answer</p>
+      <% end %>
+      Answer: <%= answer.body %> <br>
+    <% if logged_in? && @question.has_best_answer?(current_user) %>
+
+
+
+      <form id="best_answer_button" method="POST" action="<%= @question.id %>/favorite" >
+        <input type="hidden" value="<%=answer.id%>" name="answer_id">
+        <button type="submit" name="favorite" value="submit_value">Best Answer</button>
+      </form>
+
+    <% end %>
+
+      <div>
+      <% if logged_in? %>
+      <form id="upvote-button-answer" method="POST" action="/answers/<%=answer.id%>/upvote" >
+        <button type="submit" name="upvote" value="submit_value">upvote</button>
+      </form>
+      <% end %>
+      </div>
+
+      <div>
+      <% if logged_in? %>
+      <form id="downvote-button-answer" method="POST" action="/answers/<%=answer.id%>/downvote" >
+        <button type="submit" name="downvote" value="submit_value">downvote</button>
+      </form>
+      <% end %>
+      </div>
+
+    </li>
     <li> <a href="/answers/<%=answer.id%>/comment/new">Comment on This Answer</a></li>
      <% answer.comments.each do |comment| %>
       <ul>
