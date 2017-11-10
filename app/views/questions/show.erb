@@ -1,4 +1,5 @@
 <p><%= @message %></p>
+<div class="question-container">
 <center><h1><%= @question.title %></h1>
 <h2>Page Question: <%= @question.description %></h2>
 
@@ -19,8 +20,13 @@
 </div>
 
 <div id='links_to_add_content'>
-<a href="/questions/<%=@question.id%>/answer/new">Add an Answer</a>
-<a href="/questions/<%=@question.id%>/comment/new">Comment on This Question</a>
+<a class="answer-comment-link" href="/questions/<%=@question.id%>/answer/new">Add an Answer</a>
+<a class="question-comment_link" href="/questions/<%=@question.id%>/comment/new">Comment on This Question</a>
+
+<form id="create_comment_for_question" class="hidden" action="/questions/<%= @question.id %>/comments" method='post'>
+  <input id="comment_text" type="text" name="comment_content">
+  <input name="commit" type="submit" value="create comment" />
+</form>
 
 </div>
 
@@ -32,6 +38,8 @@
   </ul>
   <% end %>
 </div>
+</div>
+<div class="answers-container">
 <h1>ANSWER</h1>
 <div class="question_answers">
   <ul>
@@ -80,5 +88,6 @@
     <% end %>
   </ul>
   <% end %>
+</div>
 </div>
 </center>
