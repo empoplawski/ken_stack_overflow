@@ -18,27 +18,26 @@
   <title></title>
 </head>
 <body>
-  <%= if logged_in %>
+
     <nav>
       <ul>
-        <li>Welcome <%= current_user.first_name %></li>
-        <li><a href='/'>Home</li>
+        <li><a href='/'>Home</a></li>
+        <% if logged_in? %>
+          <li>Welcome, <%=current_user.username%></li>
         <li>
-          <form action='/sessions/<%= current_user.user_id %>' method='POST'
+          <form action='/sessions' method='POST'>
           <input type='hidden' name="_method" value="DELETE">
-          <input class="logout" type="submit" value="logout">
+          <input class="logout-button" type="submit" value="logout">
           </form>
         </li>
+        <% end %>
+        <% if !logged_in? %>
+        <li><a href='/users/new'>Register</a></li>
+        <li><a href='/sessions/new'>Login</a></li>
+        <% end %>
       </ul>
     </nav>
-    <% else %>
-      <nav>
-        <ul>
-          <li><a href='/'>Home</li>
-          <li><a href='/users/new'>Register</li>
-          <li><a href='/sessions/new'>Login</li>
-        </ul>
-      </nav>
+
   <%= yield %>
 </body>
 </html>

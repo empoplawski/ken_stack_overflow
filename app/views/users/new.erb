@@ -1,0 +1,21 @@
+<h1>Registration</h1>
+
+<% if @errors %>
+  <%= erb :"_errors", locals: {errors: @errors} %>
+<% end %>
+
+<div id="form-registration">
+<form action="/users" method="post">
+
+  <label for="username">Username</label>
+  <input type="text" name="user[username]" placeholder="Username">
+
+  <label for="email">Email</label>
+  <input type="email" name="user[email]" placeholder="Email">
+
+  <label for="password">Password</label>
+  <input type="password" name="user[password]" placeholder="password">
+
+  <input class="register-button" type="submit" value="Register">
+</form>
+</div>

@@ -7,6 +7,4 @@ class Question < ApplicationRecord
   validates :title, :description, presence: true
   validates :asker, presence: true
 
-
-  # Remember to create a migration!
 end
