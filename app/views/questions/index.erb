@@ -1,6 +1,16 @@
 <h1>No Name Stackoverflow</h1>
+
+ <% if logged_in? %>
+  <div class="ask-question-button">
+    <form action='/questions/new'>
+      <button type="submit">Ask A Question</button>
+    </form>
+  </div>
+<% end %>
+
 <ul>
 <% @questions.each do |question| %>
-  <li><a href="/questions/<%=question.id%>"><%= question.title %></a><br> Total Votes: <%= question.votes.length %> | Total Answers: <%= question.answers.length %> | Total Comments: <%= question.comments.length %></li>
+  <li><a href="/questions/<%=question.id%>"><%= question.title %></a><br>
+    Total Votes: <%= question.votes.length %> | Total Answers: <%= question.answers.length %> | Total Comments: <%= question.comments.length %></li>
 <% end %>
 </ul>
