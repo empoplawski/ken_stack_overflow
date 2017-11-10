@@ -6,4 +6,10 @@ class Answer < ApplicationRecord
 
   validates :body, presence: true
 
+  def total_votes
+    self.votes.reduce(0) do |total, vote|
+      total + vote.value
+    end
+  end
+
 end

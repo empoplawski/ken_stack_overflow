@@ -4,4 +4,8 @@ class Vote < ApplicationRecord
 
   validates :voter, {uniqueness: {scope: :votable} }
 
+
+
+
+
 end
