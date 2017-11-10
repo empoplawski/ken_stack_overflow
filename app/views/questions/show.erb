@@ -1,22 +1,30 @@
 <center><h1><%= @question.title %></h1>
 
-<h2><%= @question.description %></h2>
+<h2>Page Question: <%= @question.description %></h2>
 
+<div id='links_to_add_content'>
+<a href="/questions/<%=@question.id%>/answer/new">Add an Answer</a>
+<a href="/questions/<%=@question.id%>/comment/new">Comment on This Question</a>
+
+</div>
+
+<h1> BELOW THIS IS The Question comments</h1>
 <div class="question_comments">
   <ul>
   <% @question.comments.each do |comment| %>
-    <li><%= comment.content %></li>
+    <li>Question Comment: <%= comment.content %></li>
   </ul>
   <% end %>
 </div>
-
+<h1> BELOW THIS IS ANSWER</h1>
 <div class="question_answers">
   <ul>
   <% @question.answers.each do |answer| %>
-    <li><%= answer.body %></li>
+    <li>Answer: <%= answer.body %></li>
+    <li> <a href="/answers/<%=answer.id%>/comment/new">Comment on This Answer</a></li>
      <% answer.comments.each do |comment| %>
       <ul>
-        <li><%= comment.content %></li>
+        <li>Answer Comment: <%= comment.content %></li>
       </ul>
     <% end %>
   </ul>

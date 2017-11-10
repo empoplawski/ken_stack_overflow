@@ -1,0 +1,11 @@
+<h1> Ask A Question </h1>
+
+  <% if @errors %>
+  <%= erb :"_errors", locals: {errors: @errors} %>
+<% end %>
+
+ <form id="create_question" action="/questions" method='post'>
+  <input id="question_title" type="text" name="question[title]">
+   <input id="question_body" type="text" name="question[description]">
+  <input  type="submit" value="Submit Question" />
+  </form>
