@@ -3,5 +3,5 @@ class Vote < ApplicationRecord
   belongs_to :votable, polymorphic: true
 
   validates :voter, {uniqueness: {scope: :votable} }
-  # Remember to create a migration!
+
 end
