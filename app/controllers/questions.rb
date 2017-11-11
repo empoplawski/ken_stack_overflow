@@ -57,13 +57,21 @@ post '/questions/:id/comments' do
 
   @question = Question.find(params[:id])
   @comment = Comment.create(content: params[:comment_content], commentable_type: "Question", commentable_id: @question.id, commenter_id: current_user.id)
-
-  if @comment.valid?
-    redirect "/questions/#{@question.id}"
+  if request.xhr?
+    if @comment.valid?
+      #render an erb of just the new comment
+    else
+      status 422
+        @errors = @comment.errors.full_messages
+      erb :'comments/new_for_question'
   else
-    status 422
-    @errors = @comment.errors.full_messages
-    erb :'comments/new_for_question'
+    if @comment.valid?
+      redirect "/questions/#{@question.id}"
+    else
+      status 422
+      @errors = @comment.errors.full_messages
+      erb :'comments/new_for_question'
+    end
   end
 
 end
