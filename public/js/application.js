@@ -8,18 +8,38 @@ $(document).ready(function() {
     event.preventDefault();
     $(".question-comment_link").hide();
     $("#create_comment_for_question").removeClass();
-    // console.log("hello")
+  })
 
-    // var $button = $(this);
-    // var url = $button.attr("href");
+  $("#create_comment_for_question").on("submit", function(event){
+    event.preventDefault();
+    // console.log("hello");
+
+    var $form = $(this);
+    var url = $form.attr("action");
+    var method = $form.attr("method");
+    var data = $form.serialize();
+
     // console.log(url);
-    // var request = $.ajax({
-    //   url: url
-    // })
-    // request.done(function(response){
-    //   console.log(response);
-    // })
+    // console.log(method);
+    // console.log(data);
+    var request = $.ajax({
+      url: url,
+      method: method,
+      data: data
+    })
+    request.done(function(response){
+      // $(".question_comments").append(response);
+      console.log(response);
+    })
 
+    request.fail(thing1, thing2, thing3){
+
+    }
 
   })
+
+
+
+
+
 });
