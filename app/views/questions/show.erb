@@ -31,10 +31,10 @@
 </div>
 
 <h1>Question comments</h1>
-<div class="question_comments">
-  <ul>
+<div>
+  <ul class="question_comments">
   <% @question.comments.each do |comment| %>
-    <li>Question Comment: <%= comment.content %></li>
+    <li>Question Comment: <%= erb :"/comments/_question_comments", locals: {comment: comment} %></li>
 
   <% end %>
   </ul>
