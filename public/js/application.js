@@ -8,38 +8,27 @@ $(document).ready(function() {
     event.preventDefault();
     $(".question-comment_link").hide();
     $("#create_comment_for_question").removeClass();
-  })
+  });
 
   $("#create_comment_for_question").on("submit", function(event){
     event.preventDefault();
-    // console.log("hello");
 
     var $form = $(this);
     var url = $form.attr("action");
     var method = $form.attr("method");
     var data = $form.serialize();
-
-    // console.log(url);
-    // console.log(method);
-    // console.log(data);
     var request = $.ajax({
       url: url,
       method: method,
       data: data
-    })
+    });
+
     request.done(function(response){
-      // $(".question_comments").append(response);
-      console.log(response);
-    })
+      $(".question_comments").append("<li>"+response+"</li>");
+      $(".question-comment_link").show();
+      $("#create_comment_for_question").addClass("hidden");
+    });
 
-    request.fail(thing1, thing2, thing3){
-
-    }
-
-  })
-
-
-
-
+  });
 
 });
